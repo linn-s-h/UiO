@@ -13,7 +13,7 @@ class Rutenett {
     public void lagCelle(int r, int k){
 
         Celle celle = new Celle();
-        if (Math.random()<=0.3333){
+        if (Math.random()<=0.3333){ // 1/3 sjanse
             celle.settLevende();
         }
         rutene[r][k] = celle; //legger celle i rutenettet
