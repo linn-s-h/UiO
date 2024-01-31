@@ -1,0 +1,125 @@
+
+//monitor håndterer fellesressurser //beskyttelseslag for kritiske handlinger 
+//låser rundt disse kritiske operasjonene og regioner
+//await() er konsumerende metode //throw Exception
+
+Andre viktige prinsipper:
+
+Du har en klasse som implemterer interfacet Runnable,
+og klassens konstruktør tar inn en objekt-referanse av en Monitor.
+I monitor vil du ha metoder med låser og conditions, for å dele
+fellesressurser men også behandle kritiske regioner da
+traader kan være sårbare til komplikasjoner
+I monitor-klassen er det som regel en beholder.
+Noen ganger deler monitor klassen noen metoder
+med en annen klasse (SubsekvensRegister vs. SubsekvensMonitor).
+Monitor-klassen vil ta inn referanse til registeret som argument, 
+i tillegg til at det må opprettes objekter av begge klasser:
+
+Stemmesystem stemmesystem = new Stemmesystem();
+MonitorStemmesystem monitor = new MonitorStemmesystem(stemmesystem);
+
+Implemterer:
+
+import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Condition;
+
+//Slik kan du opprette traader i main
+for (int i = 0; i < ANTALL_STEMMETELLERE; i++){
+        stemmetellere[i] = new Thread(new Stemmeteller(i, ANTALL_STEMMER_PER_TELLER, monitor)); //sender inn runnable objekt
+        stemmetellere[i].start(); //evaluerer til et Thread-objekt, kaller på run() metoden
+    }
+
+I main vil du oftest ha en barriere slik at traadene må kjøre ferdig
+før hovedprogrammet kan fortsette. Dette er da for å hindre
+at traadene havner i en deadlock videre i programmet
+
+Barrierer: CountDownLatch eller join();
+
+//I oppretting av CountDownLatch sender du inn antall kjøringer
+CountDownLatch antTraader = new CountDownLatch(8);
+
+//I run-metode
+while (antTraader.getCount > 0){
+    //ting og tang
+    antTraader.countDown();
+}
+
+//Med join() kan det være lurt å ha en Traad-beholder
+ArrayList<Thread> traader = new ArrayList<>();
+//traader.add(traad);
+for (Thread traad : traader){
+    traad.join();
+    } 
+
+//eller:
+
+Thread[] smittetTraader = new Thread[8];
+for (int i = 0; i < 8; i++){
+    smittetTraader[i] = new Thread(new FletteTrad(smittet, antSmittetTraader));
+    smittetTraader[i].start();
+}
+
+=====LAASER I MONITOR=====
+
+public Parti taUtStemme() throws InterruptedException{
+    laas.lock();
+    try { //uansett hva som skjer i try, så vil det skje
+        //kritisk region
+        while (tomtForStemmer()){
+            ikkeTomt.await(); //passiv venting - bruker ikke undøvendig ressurser
+                                //aktiv venting - while loop som går evig til condition er møtt
+                                //await() venter på betingelse og i riktig rekkefølge 
+        }
+        return stemmesystem.taUtStemme();
+
+    } finally {
+        laas.unlock();
+    }
+}
+
+public Kniv[] taUtToKniver(){
+    laas.lock();
+    try {
+        if (hentAntKniver() > 1){
+            Kniv[] kniver = new Kniv[2];
+            /*kniver[0] =*/ knivBeholder.remove(0);
+            /*kniver[1] =*/ knivBeholder.remove(0);
+            return kniver;
+
+        } else {
+            return null;
+        }
+            
+    } finally {
+        laas.unlock();
+    }
+}
+
+public Post hentPost(String mottaker){
+            laas.lock();
+            try {
+                if (stoerrelse() == 0){
+                    ingenPost.await();
+                }
+                for (int i = 0; i < postArray.length; i++){
+                    if (postArray[i] != null){
+                        if (postArray[i].hentMottaker().equals(mottaker));
+                        Post post = postArray[i];
+                        postArray[i] = null; //fjerner hentet post ved å sette den til null
+                        fullPost.signal(); //gir beskjed til andre tråder at posten ikke er full lenger
+                        return post;
+                    }
+                } ingenPost.await();
+
+            } catch (InterruptedException e){
+                System.out.println("Ikke hent post.");
+            } finally {
+                laas.unlock();
+            }
+            return null;
+        }
+
+

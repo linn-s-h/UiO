@@ -1,0 +1,259 @@
+
+int naaPris = (int)Math.round(legemiddel.hentPris() * 0.25);
+ int tilfeldigIndeks = (int) Math.round(Math.random() * (partier.length - 1)); //returnerer tall mellom 0.0 og 0.1
+
+public void lagCelle(int r, int k){
+    Celle celle = new Celle();
+    if (Math.random()<=0.3333){ //gir true 1 av 3 ganger
+        celle.settLevende(); 
+    }
+    rutene[r][k] = celle; //legger til celle, levende eller død
+}
+
+temperaturArray[i] = Integer.toString(data); //konverterer int til String
+temperaturArray[i] = String.valueOf(data);
+if (str.charAt(0) == '#'){}
+beskrivelse += (getClass().getName() + " pris: " + prisAaBetale());
+
+return String.format("%02d.%02d.&04d kl %02d:%02d:%02d", dag, mnd, aar, time, min, sek);
+
+File fil = new File("Temperatur.txt");
+Scanner scanner = new Scanner(fil); //skal lese fra fil
+
+if ( i % 2 == 0)  // har to kunder som står i kø
+                //partall
+
+======Array======
+
+class Saks {
+
+    Kniv[] knivblader = new Kniv[2];
+    public Saks(Kniv k1, Kniv k2){
+        k1 = knivblader[0];
+        k2 = knivblader[1];
+    }
+}
+
+=======ArrayList========
+
+koLapper.isEmpty()
+koLapper.remove(koLapper.get(0)) //fjerner første element i ArrayList
+koLapper.size()
+koLapper.add(lapp)
+koLapper.contains(sistelapp)
+ 
+ 
+=======HashMap==========
+
+telefonbok.forEach((key, value)->
+System.out.println(key + ": " + value));
+
+telefonbok.put(lars.hentNavn(), lars);
+telefonbok.containsKey(type parameter);
+telefonbok.size() returnerer en int
+telefonbok.get(person) -> får nummer som verdi hvis person er nøkkel
+telefonbok.keySet(){} // for (key : telefonbok.keySet()){} → .values()
+telefonbok.isEmpty();
+telefonbok.remove(key);
+
+for (Map.Entry<String, Integer> entry : hashMap.entrySet()) {
+    String key = entry.getKey();
+    Integer value = entry.getValue();
+    System.out.println("Key: " + key + ", Value: " + value);
+}
+
+=======HOVEDMENY & SCANNER========
+
+public void meny(){
+
+    System.out.println("****** MENY ******");
+    System.out.println("1. Opprett og legg til nye elementer i systemet");
+    System.out.println("2. Bruk en gitt resept fra listen til pasient");
+    System.out.println("3. Skriv ut forskjellig former for statistikk");
+    System.out.println("4. Skriv all data til fil");
+    System.out.println("0. Avslutt");
+}
+
+public void kommandolokke(){
+
+    Scanner input = new Scanner(System.in);
+    int inputFraBruker = -1;
+
+    while (inputFraBruker != 0){
+        if (inputFraBruker == 1){
+            //metode
+        } else if (inputFraBruker == 2){
+            //metode
+        } else if (inputFraBruker == 3){
+            //metode
+        } else if (inputFraBruker == 4){
+            //metode
+        }
+        meny();
+        inputFraBruker = Integer.parseInt(input.nextLine());
+    }
+}
+
+import java.util.Scanner;
+
+class KoProgram{
+    public static void main(String[] args){
+        KoSystem koSystem = new KoSystem();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Velg");
+        int velgBetjening = scanner.nextInt();
+
+        while (velgBetjening != 4){
+            hentMeny();
+            System.out.println("Velg");
+            velgBetjening = scanner.nextInt();
+
+            if (velgBetjening == 1){
+                koSystem.trekkKoLapp();
+            }
+            else if (velgBetjening == 2){
+                koSystem.betjenKunde();
+            }
+            else if (velgBetjening == 3){
+                koSystem.printerKunderIKo();
+            }
+            else{
+                System.out.println("Vennligst velg 1, 2, 3 eller 4");
+            }
+        }
+    }
+    public static void hentMeny(){
+        String meny = "\n *** MENY *** \n";
+        meny += "1. Trekk ny koelapp \n";
+        meny += "2. Betjen kunde \n";
+        meny += "3. Print antall i koe \n";
+        meny+= "4. Avslutt \n";
+
+        System.out.println(meny);
+    }
+}
+
+
+public void settInn(Baat baaten){ //sender inn referanse til objekt
+    int i = 0;
+    boolean plassTilBaat = false;
+    while (i < baathus.length){ // kan droppe break; og heller ha: && plassTilBaat = false
+        if (baathus[i] == null){
+            baathus[i] = baaten;
+            plassTilBaat = true;
+            break;
+        }
+        i++;
+    }
+    if (plassTilBaat == false){
+        System.out.println("No more space for bitches.");
+    }
+
+}
+
+=========keySet() og get()=============
+
+while (avslutt == false){
+    System.out.print("Navn?\n> ");
+    String input = scanner.nextLine();  
+
+    if (!input.equals("i")){ // alltid bruk equals fra nå av
+        for (String person : telefonbok.keySet()){
+            if (person.equals(input)){ // må bruke .equals() fordi vi sammneligner String variabler
+                System.out.println(telefonbok.get(person));
+            }
+        }  
+        if(!(telefonbok.containsKey(input))){ //hvis input ikke er i telefonbok
+            System.out.println("Personen finnes ikke i telefonkatalogen.");
+        }
+    }
+    else{
+        avslutt = true;
+    }
+}
+
+for (String subsekvens : hSmittet.keySet()){
+    Subsekvens subsekvensObj = hSmittet.get(subsekvens);
+    if (hFrisk.get(subsekvens) != null){
+        if (subsekvensObj.hentAntForekomster() - hFrisk.get(subsekvens).hentAntForekomster() > 6){
+            dominante.put(subsekvens, subsekvensObj.hentAntForekomster());
+        }
+    } else {
+        if (hSmittet.get(subsekvens).hentAntForekomster() > 6){
+            dominante.put(subsekvens, subsekvensObj.hentAntForekomster());
+        }
+    }
+}
+
+for (HashMap<String, Subsekvens> hashmap : hashmaps){
+
+    for (HashMap.Entry<String, Subsekvens> h : hashmap.entrySet()){
+        String str = h.getKey();
+        Subsekvens s = h.getValue();
+        if (!flettetHashMap.containsKey(str)){
+            flettetHashMap.put(str, s);
+            
+        } else {
+            //Hvis subsekvensen allerede har forekommet før, så finner vi ant forekomster begge steder og endrer
+            //ant forekomster i beholderen med flettet hashmapper
+            //Bruker Map.Entry
+            for (HashMap.Entry<String, Subsekvens> hData : flettetHashMap.entrySet()){
+                String strData = hData.getKey();
+                Subsekvens sData = hData.getValue();    
+                if (strData.equals(str)){
+                    int nyAnt = sData.hentAntForekomster() + s.hentAntForekomster(); //ikke + 1 !
+                    sData.endreAntForekomster(nyAnt);
+                    //System.out.println(strEntry + " " + nyAnt);
+                    
+                }
+            }
+        }
+    }
+} return flettetHashMap;
+
+========FilInnlesing=======
+
+public void lesFraFil(String filnavn) throws Exception{
+    Scanner lesFraFil = new Scanner(filnavn); //new Scanner(new File(filnavn));
+    while (lesFraFil.hasNextLine() && totalStudenter < navn.length){
+        navn[totalStudenter] = lesFraFil.nextLine();
+        totalStudenter++;
+    }
+    lesFraFil.close();
+}
+
+public static HashMap<String, Subsekvens> lesFil(String filnavn) throws FileNotFoundException {
+
+    File fil = new File(filnavn);
+    Scanner sc = new Scanner(fil); //Lese fil
+
+    //oppretter ny hashmap med subsekvenser
+    HashMap<String, Subsekvens> hashmap = new HashMap<>();
+
+    while (sc.hasNextLine()){
+        String linje = sc.nextLine();
+
+        for (int i = 0; i < linje.length() - 2; i++){ //vil ikke sjekke forbi de 3 siste sifrene
+            String str = linje.substring(i, i + 3);
+            Subsekvens subsekvens = new Subsekvens(str);
+            hashmap.put(str, subsekvens);
+        }
+    } sc.close(); return hashmap; 
+}
+
+======While-Do======
+
+String fortsett = scan.nextLine();
+do {
+    gameOfLife.tegn();
+    gameOfLife.oppdatering();
+    fortsett = scan.nextLine();
+}
+while (!fortsett.equals("q")); //bruker må trykke q og enter for å avslutte program
+
+=====FileNotFoundException=====
+
+catch (FileNotFoundException error){
+    System.out.println("Uforventet resultat.");
+    error.printStackTrace();
+}

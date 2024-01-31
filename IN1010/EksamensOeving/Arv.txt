@@ -1,0 +1,98 @@
+
+
+================ARV OG POLYMORFI===============
+
+Vi har sub-klasser av en hovedklasse for at det skal kjøre
+effektivt, ved at vi utvider klassen hovedinstansen og gir
+hovedklassen flere egenskaper.
+
+Polymorfi prinsipper:
+- Polymorfe metoder: De nye metodene i subklassen overskriver metoden definert i superklassen
+- Alle metoder i Java er polymorfe
+- Annotasjon @Override (redefinere metoder)
+- Metoder med/uten parameter = forskjellig signatur
+- abstract metoder deklareres i hovedklassen og må implementeres i subklassene:
+    abtract public String farge(){}
+
+class Dog extends Animal(){}
+    Animal Dog = new Animal();
+    #Dog er nå en arv av superklassen Animal
+
+CompareTo:
+
+//Klassen må implementere Comparable<> !!!
+
+if (denne.data.compareTo(annen.data)){
+    //compareTo returner en int; 0, 1 eller -1
+    //returner 0 hvis like stor eller lik plass
+    //returner 1 hvis denne er større enn annen
+    //returner -1 hvis denne er mindre enn annen 
+}
+
+Eksempel koder:
+
+=====HOVEDKLASSE======
+
+abstract class Legemiddel{ // lage objekter via subklasser
+
+    public final String navn;
+    private int pris; //har metoder som gjør at vi kan endre den private instansen utenfor klassen
+    public final double virkestoff; //angis i mg
+    public final int id; 
+    public static int idTeller = 0; //må ha en teller som gjelder for alle klasser og ikke resetter seg selv
+
+    public Legemiddel(String navn, int pris, double virkestoff){
+        this.navn = navn;
+        this.virkestoff = virkestoff;
+        this.pris = pris;
+        id = idTeller; //med final så er det lov å assigne en final varibel til å peke på en static variabel 
+        idTeller++; //id endrer seg for hvert objekt som opprettes, slik at ingen legemiddel har samme id
+    }
+    public int hentPris(){
+        return pris;
+    }
+    public void settNyPris(int nyPris){
+        pris = nyPris;
+    }
+    @Override
+    public String toString(){ //magisk string metode 
+        return id + " – " + navn + "(" + virkestoff + " mg): " + pris + " kr"; 
+    }
+}
+
+======SUBKLASSE====== - denne har ingen redefinerte metoder
+ 
+class Vanedannende extends Legemiddel{
+
+    public final int styrke;
+    public Vanedannende(String navn, int pris, double virkestoff, int styrke){
+        super(navn, pris, virkestoff);
+        this.styrke = styrke;
+    }
+}
+
+======SUBKLASSE AV KLASSEN LEGE======
+
+
+class Spesialist extends Lege implements Godkjenningsfritak{
+
+    protected String kontrollKode;
+    public Spesialist(String navnLege, String kode){
+        super(navnLege); //arver kun navnLege fra Lege
+        kontrollKode = kode; //Spesialist har sin egen egenskap Lege ikke har
+    }
+    public String hentKontrollKode(){
+        return kontrollKode;
+    }
+    @Override
+    public String toString(){
+        return super.toString() + " – " + "Kontrollkode: " + kontrollKode;
+    }
+}
+
+======Interface=====
+
+interface Godkjenningsfritak{
+    String hentKontrollKode(); //metode signatur
+}
+
