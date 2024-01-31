@@ -1,0 +1,18 @@
+
+b)  Ulempen med å ha filnavn som parameter til konstruktøren, er at
+    det ikke hadde vært mulig å sende inn flere tekstfiler som argument
+    til Spilleliste. Det er mye mer fleksibelt å ha filnavn utenfor konstruktøren.
+
+c)  Oppsettet til sanger er gjerne sånn at det dukker opp i formatet
+    "Kanye West - Black Skinhead", altså bestående av en artist og en sang.
+    I spillelister er det mulig at en artist dukker opp igjen med en annen sang.
+    Det er derfor naturlig å velge en liste fremfor ordbok her, fordi en artist kan
+    dukke opp flere ganger i en spilleliste, men med en helt annen sangtittel. Det går uansett
+    bare an å spille en sang om gangen, så det blir unaturlig å ha en ordbok
+    hvor du ramser opp alle sangene til artisten, hvor artist er nøkkel og sangene verdi.
+    Når metoden spill() da blir kalt vil sangene overwrite hverandre og spille samtidig
+    hvis de var i en ordbok.
+
+d)  ny_sang = Sang(alle_data[1], alle_data[0]) #siden artist kommer etter sangtittel
+    blir til                                    #men ønsket format er artist - sangtittel
+    ny_sang = Sang(alle_data[0], alle_data[1]) #hvis artist hadde kommet først in tekstfil

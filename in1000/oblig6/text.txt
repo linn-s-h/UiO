@@ -1,0 +1,14 @@
+
+1.  Innkapsling er at man har lokale variabler inne i en funksjon eller lignende.
+    Blant annet har man instansvariabler i en metode sånn at objekter fra andre
+    klasser ikke har direkte tilgang til å endre tilstanden til et objekt.
+    Kortere sagt, så er det nyttig sånn at variablene i en klasse kun kan endres
+    på inne i klassen selv.
+
+2.  Metode er grensesnitt vi tilbyr brukeren, og grensesnitt tilbyr objektet
+    til å endre verdi. Hvis objektet til en instansvariabel, f.eks. skal endre
+    vekt, så må det være en instansmetode for å tilby endringen.
+
+3.  Metode er blokker med kode bestående av rekke setninger som gir oss
+    informasjon om et objektet. Metode kan kun bli brukt av objekter i klassen,
+    mens funksjoner er uavhengige blokker.
