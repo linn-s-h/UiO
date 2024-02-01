@@ -55,7 +55,7 @@ class Celle {
         }
         else{
             if (antLevendeNaboer == 3){ //hvis if kravet ikke blir oppfylt så forblir cellen doed
-                settLevende(); 
+                settLevende();
             }
         }
     }
